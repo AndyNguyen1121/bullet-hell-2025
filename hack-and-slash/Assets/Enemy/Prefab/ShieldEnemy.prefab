@@ -2510,7 +2510,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.54
-  m_Speed: 0.01
+  m_Speed: 1
   m_Acceleration: 10000
   avoidancePriority: 50
   m_AngularSpeed: 100000
@@ -2541,7 +2541,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
@@ -2563,6 +2563,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyManager: {fileID: 0}
   animator: {fileID: 0}
+  rb: {fileID: 0}
 --- !u!114 &3655334199169948333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2653,7 +2654,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   agent: {fileID: 0}
   enemyCollider: {fileID: 0}
-  moveSpeed: 2
+  moveSpeed: 1
   bloodParticle: {fileID: 6550804457596160986, guid: c2ff9a62d0009a64a81cc1a4bba59fd5, type: 3}
   minCooldown: 2
   maxCooldown: 4

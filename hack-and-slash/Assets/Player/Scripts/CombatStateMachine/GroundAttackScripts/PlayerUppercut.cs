@@ -17,6 +17,19 @@ public class PlayerUppercut : PlayerCombatBaseState
             canMove: false,
             useGravity: false);
 
+        if (playerManager.playerCameraManager.isLockedOn)
+        {
+            Vector3 enemyPosition = playerManager.playerCameraManager.currentLockOnTarget.position;
+            enemyPosition = new Vector3(enemyPosition.x, playerManager.transform.position.y, enemyPosition.z);
+
+            stateMachine.GravitateTowardsTransform(
+                objectTransform: playerManager.playerCameraManager.currentLockOnTarget,
+                distanceToStop: 1.5f,
+                minimumDistance: 1.5f,
+                maximumDistance: 5f,
+                duration: 0.1f);
+        }
+
         stateMachine.playerManager.playerMovementManager.isJumping = true;
         PlayerManager.instance.EnableEnemyLayerCollision();
     }

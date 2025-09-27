@@ -294,6 +294,7 @@ MonoBehaviour:
   isPerformingAction: 1
   enableAgent: 0
   disableWeaponCollider: 1
+  canMove: 0
 --- !u!1102 &-793124728142088893
 AnimatorState:
   serializedVersion: 6
@@ -856,6 +857,7 @@ MonoBehaviour:
   isPerformingAction: 0
   enableAgent: 0
   disableWeaponCollider: 1
+  canMove: 0
 --- !u!1101 &6540637533712602437
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -964,7 +966,7 @@ BlendTree:
   m_Name: GuardMovementBlend
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 3b3681544d87986459ccba0a9cd161b1, type: 2}
+    m_Motion: {fileID: 7400000, guid: 085d62b6fcbd5384bb2164b8dc4aa3d2, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1

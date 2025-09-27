@@ -31,6 +31,8 @@ public class EnemyInteractionManager : MonoBehaviour
         enemyManager = GetComponent<EnemyManager>();
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+
+        rb.isKinematic = false;
     }
 
     public virtual void Update()
@@ -63,7 +65,7 @@ public class EnemyInteractionManager : MonoBehaviour
         {
             animator.CrossFade("KnockupEnd", 0.15f);
             inKnockUpAnimation = false;
-            rb.isKinematic = true;
+            //rb.isKinematic = true;
             timeOnGround = 0f;
         }
     }
@@ -211,8 +213,8 @@ public class EnemyInteractionManager : MonoBehaviour
         grappleTween = rb.DOMove(desiredPosition, 0.25f).SetEase(Ease.OutSine)
             .OnComplete(() =>
             {
-                if (!inKnockUpAnimation)
-                    rb.isKinematic = true;
+                //if (!inKnockUpAnimation)
+                    //rb.isKinematic = true;
             });
            
 

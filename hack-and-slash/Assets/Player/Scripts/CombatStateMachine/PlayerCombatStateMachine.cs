@@ -104,22 +104,40 @@ public class PlayerCombatStateMachine : MonoBehaviour
 
     public void GravitateTowardsTransform(Transform objectTransform, float distanceToStop, float minimumDistance, float maximumDistance, float duration)
     {
-        if ((Vector3.Distance(objectTransform.position, transform.position) < minimumDistance) || (Vector3.Distance(objectTransform.position, transform.position) > maximumDistance))
+        float currentDistance = Vector3.Distance(objectTransform.position, transform.position);
+
+        if (currentDistance > maximumDistance)
             return;
+
         playerManager.canMove = false;
 
         Vector3 dirFromPlayerToTarget = (objectTransform.position - transform.position).normalized;
-        Vector3 adjustedTargetPosition = objectTransform.position + (-dirFromPlayerToTarget * distanceToStop);
-
         Vector3 startPos = transform.position;
-
-        DOTween.To(() => 0f, x =>
+        if (currentDistance < minimumDistance)
         {
-            Vector3 adjustedTargetPosition = objectTransform.position + (-dirFromPlayerToTarget * distanceToStop);
+            Vector3 pushTarget = objectTransform.position - (dirFromPlayerToTarget * minimumDistance);
 
-            adjustedTargetPosition.y = startPos.y;
-            Vector3 targetPos = Vector3.Lerp(startPos, adjustedTargetPosition, x / duration);
+            DOTween.To(() => 0f, t =>
+            {
+                Vector3 targetPos = Vector3.Lerp(startPos, pushTarget, t / duration);
 
+                targetPos.y = startPos.y; // keep height
+                Vector3 delta = targetPos - playerManager.transform.position;
+                playerManager.characterController.Move(delta);
+
+            }, duration, duration).OnComplete(() => playerManager.canMove = true);
+
+            return;
+        }
+
+        // Case 2: In range -> pull towards distanceToStop
+        Vector3 pullTarget = objectTransform.position - (dirFromPlayerToTarget * distanceToStop);
+
+        DOTween.To(() => 0f, t =>
+        {
+            Vector3 targetPos = Vector3.Lerp(startPos, pullTarget, t / duration);
+
+            targetPos.y = startPos.y; // keep height
             Vector3 delta = targetPos - playerManager.transform.position;
             playerManager.characterController.Move(delta);
 

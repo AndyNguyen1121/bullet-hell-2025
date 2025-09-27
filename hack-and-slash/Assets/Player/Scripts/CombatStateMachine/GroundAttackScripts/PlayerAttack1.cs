@@ -12,7 +12,7 @@ public class PlayerAttack1 : PlayerCombatBaseState
         playerManager.playerAnimationManager.PlayActionAnimation(
             animationName: "Attack1",
             isPerformingAction: true, 
-            applyRootMotion: true, 
+            applyRootMotion: !playerManager.playerCameraManager.isLockedOn, 
             rotateTowardsPlayerInput: !playerManager.playerCameraManager.isLockedOn, // do not follow input rotation when locked on
             canRotate: playerManager.playerCameraManager.isLockedOn, // allow lock on rotations to occur during attack
             canMove: false, 

@@ -10,11 +10,24 @@ public class PlayerAttack2 : PlayerCombatBaseState
         playerManager.playerAnimationManager.PlayActionAnimation(
             animationName: "Attack2",
             isPerformingAction: true,
-            applyRootMotion: true,
+            applyRootMotion: !playerManager.playerCameraManager.isLockedOn,
             rotateTowardsPlayerInput: !playerManager.playerCameraManager.isLockedOn, // do not follow input rotation when locked on
             canRotate: playerManager.playerCameraManager.isLockedOn, // allow lock on rotations to occur during attack
             canMove: false,
             useGravity: true);
+
+        if (playerManager.playerCameraManager.isLockedOn)
+        {
+            Vector3 enemyPosition = playerManager.playerCameraManager.currentLockOnTarget.position;
+            enemyPosition = new Vector3(enemyPosition.x, playerManager.transform.position.y, enemyPosition.z);
+
+            stateMachine.GravitateTowardsTransform(
+                objectTransform: playerManager.playerCameraManager.currentLockOnTarget,
+                distanceToStop: 1.5f,
+                minimumDistance: 1.5f,
+                maximumDistance: 5f,
+                duration: 0.1f);
+        }
     }
 
     public override void UpdateState()
