@@ -1246,6 +1246,7 @@
 0x7bd3795f4c58004f -    8922608736960774223 - Unity.VisualScripting.UnityOnInputFieldValueChangedMessageListener
 0x7bd8d54c90ddb814 -    8924117186459318292 - UnityEditor.Timeline.SequenceHierarchy
 0x7c08bd0fe8d9f7e4 -    8937601336545507300 - UnityEditor.InspectorWindow
+0x7c423dcb7fcbb9a9 -    8953786953397680553 - LockAspectRatio
 0x7c56d9bfc9c24df1 -    8959587926447115761 - Unity.Cinemachine.CinemachineSplineDollyLookAtTargets
 0x7c5a7d7030e09afe -    8960612329416858366 - UnityEngine.UIElements.VectorImage
 0x7c5ee4e77e20b27c -    8961851991418516092 - UnityEditor.VFX.Operator.TransformMatrix

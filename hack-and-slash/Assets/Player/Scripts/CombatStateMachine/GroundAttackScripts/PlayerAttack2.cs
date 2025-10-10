@@ -26,7 +26,8 @@ public class PlayerAttack2 : PlayerCombatBaseState
                 distanceToStop: 1.5f,
                 minimumDistance: 1.5f,
                 maximumDistance: 5f,
-                duration: 0.1f);
+                duration: 0.1f,
+                canMoveOnComplete: false);
         }
     }
 

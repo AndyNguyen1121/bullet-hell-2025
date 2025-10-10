@@ -46,16 +46,6 @@ public class EnemyAnimationManager : MonoBehaviour
 
         rootMotionDelta = animator.deltaPosition / Time.deltaTime;
 
-        /* // Use root motion delta, but scale it by your moveSpeed
-         Vector3 deltaPosition = animator.deltaPosition * enemyManager.moveSpeed;
-
-         // Move Rigidbody
-         Vector3 newPosition = enemyManager.enemyInteractionManager.rb.position + deltaPosition;
-         enemyManager.enemyInteractionManager.rb.MovePosition(newPosition);
-
-         // Sync agent position to Rigidbody
-         enemyManager.agent.nextPosition = newPosition;*/
-
     }
 
     public void SetMovementParameters(float horizontal, float vertical)

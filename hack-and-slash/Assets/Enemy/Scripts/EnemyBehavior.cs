@@ -73,6 +73,18 @@ public class EnemyBehavior : MonoBehaviour
         
     }
 
+    private void FixedUpdate()
+    {
+        if (movementState == MovementState.Chase)
+        {
+            LookTowardsPath();
+        }
+        else if (movementState == MovementState.Retreat)
+        {
+            LookTowardsPlayer();
+        }
+    }
+
     void UpdateRangeToTarget()
     {
         Vector3 adjustedTargetPos = new Vector3(player.position.x, 0f, player.position.z);
@@ -112,6 +124,7 @@ public class EnemyBehavior : MonoBehaviour
         if (deathSequenceStarted)
             return;
         deathSequenceStarted = true;
+        movementState = MovementState.Idle;
 
         WorldEnemyManager.Instance.UnregisterEnemy(enemyManager);
         enemyManager.enemyCombatManager.UnparentWeapon();
@@ -215,7 +228,7 @@ public class EnemyBehavior : MonoBehaviour
         choseRetreatDirection = false;
         minDistanceRangeChosen = false;
 
-        LookTowardsPath();
+        //LookTowardsPath();
 
         if (!enemyManager.canAttack && distanceFromPlayer < minDistance)
         {
@@ -234,7 +247,6 @@ public class EnemyBehavior : MonoBehaviour
 
     private void HandleRetreatMovement()
     {
-        LookTowardsPlayer();
         enemyManager.agent.updateRotation = false;
         enemyManager.agent.updatePosition = true;
 
@@ -318,19 +330,22 @@ public class EnemyBehavior : MonoBehaviour
         Vector3 dirTowardsPlayer = player.position - transform.position;
         dirTowardsPlayer.y = 0;
         Quaternion lookDir = Quaternion.LookRotation(dirTowardsPlayer);
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookDir, rotationSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookDir, rotationSpeed * Time.fixedDeltaTime);
     }
 
     private void LookTowardsPath()
     {
-        Vector3 dirTowardsPath = enemyManager.agent.desiredVelocity.normalized;
+        Vector3 dirTowardsPath = enemyManager.agent.desiredVelocity;
+        dirTowardsPath.y = 0;
+
+        dirTowardsPath.Normalize();
 
         if (dirTowardsPath.sqrMagnitude > 0.001f)
         {
             Quaternion lookDir = Quaternion.LookRotation(dirTowardsPath.normalized);
             lookDir = Quaternion.Euler(0f, lookDir.eulerAngles.y, 0f);
 
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookDir, rotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookDir, rotationSpeed * Time.fixedDeltaTime);
         }
 
     }

@@ -102,7 +102,7 @@ public class PlayerCombatStateMachine : MonoBehaviour
             .OnComplete(() => playerManager.characterController.enabled = true);
     }
 
-    public void GravitateTowardsTransform(Transform objectTransform, float distanceToStop, float minimumDistance, float maximumDistance, float duration)
+    public void GravitateTowardsTransform(Transform objectTransform, float distanceToStop, float minimumDistance, float maximumDistance, float duration, bool canMoveOnComplete)
     {
         float currentDistance = Vector3.Distance(objectTransform.position, transform.position);
 
@@ -125,7 +125,7 @@ public class PlayerCombatStateMachine : MonoBehaviour
                 Vector3 delta = targetPos - playerManager.transform.position;
                 playerManager.characterController.Move(delta);
 
-            }, duration, duration).OnComplete(() => playerManager.canMove = true);
+            }, duration, duration).OnComplete(() => playerManager.canMove = canMoveOnComplete);
 
             return;
         }
@@ -141,7 +141,7 @@ public class PlayerCombatStateMachine : MonoBehaviour
             Vector3 delta = targetPos - playerManager.transform.position;
             playerManager.characterController.Move(delta);
 
-        }, duration, duration).OnComplete(() => playerManager.canMove = true);
+        }, duration, duration).OnComplete(() => playerManager.canMove = canMoveOnComplete);
     }
 
     public bool ValidateCombatStateCriteria(CombatScriptableObj combatStateObject)

@@ -58,7 +58,7 @@ public class EnemyManager : MonoBehaviour, IDamageable
         enemyCollider = GetComponent<Collider>();
         Health = MaxHealth;
 
-        agent.enabled = false;
+        //agent.enabled = false;
         agent.enabled = true;
         ActivateRootMotion();
     }
@@ -93,7 +93,7 @@ public class EnemyManager : MonoBehaviour, IDamageable
     {
         animator.applyRootMotion = true;
         agent.updatePosition = false;
-        agent.updateRotation = true;
+        agent.updateRotation = false;
     }
 
     public void DeactivateRootMotion()

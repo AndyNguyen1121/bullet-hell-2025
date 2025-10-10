@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
 
+[System.Serializable]
 public abstract class PlayerBaseState
 {
     protected bool isRootState = false;

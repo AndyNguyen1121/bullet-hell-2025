@@ -8,6 +8,9 @@ public class WaveSettings : ScriptableObject
     public int normalEnemyCount;
     public int shieldEnemyCount;
     public int gunEnemyCount;
+
+    [SerializeReference]
+    public PlayerCombatBaseState baseState;
     
 
     [Space(10)]
